@@ -1,0 +1,261 @@
+/* Bootstrap customizations and additional styles */
+
+body {
+  font-family: "Inter", "Lato", "Roboto", "Roboto Condensed", sans-serif;
+}
+
+/* Custom styles for the property developer website */
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.service-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+.project-card {
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-3px);
+}
+
+.contact-info {
+  transition: transform 0.3s ease;
+}
+
+.contact-info:hover {
+  transform: translateY(-3px);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom button styles */
+.btn-warning {
+  background-color: #f59e0b;
+  border-color: #f59e0b;
+  color: white;
+  font-weight: 600;
+}
+
+.btn-warning:hover {
+  background-color: #d97706;
+  border-color: #d97706;
+  color: white;
+}
+
+.btn-primary {
+  background-color: #1e3a8a;
+  border-color: #1e3a8a;
+  font-weight: 600;
+}
+
+.btn-primary:hover {
+  background-color: #1e40af;
+  border-color: #1e40af;
+}
+
+.text-primary {
+  color: #1e3a8a !important;
+}
+
+.bg-primary {
+  background-color: #1e3a8a !important;
+}
+
+/* Navbar styling */
+.navbar-brand {
+  color: #1e3a8a !important;
+}
+
+.navbar-nav .nav-link {
+  font-weight: 500;
+  margin: 0 10px;
+  color: #374151 !important;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #1e3a8a !important;
+}
+
+/* Hero background overlay */
+.hero-bg {
+  z-index: 1;
+}
+
+.hero-content {
+  z-index: 2;
+  position: relative;
+}
+
+/* Additional spacing utilities */
+.py-6 {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.mb-6 {
+  margin-bottom: 4rem;
+}
+
+/* Custom card styling */
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+a:hover {
+  color: #000000; /* Bootstrap info color */
+}
+
+/* Buttons in footer */
+
+/* Floating Buttons Container */
+.floating-btn-group {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Common Button Style */
+.floating-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center content horizontally */
+  gap: 8px;
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 50px;
+  color: white;
+  font-weight: 500;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  font-size: 16px;
+  min-width: 0;
+  width: fit-content;
+}
+
+/* Animations on hover */
+.floating-btn:hover {
+  transform: translateY(-3px) scale(1.05);
+}
+
+/* Individual Button Colors */
+.btn-contact {
+  background-color: #25d366; /* WhatsApp green */
+}
+
+.btn-call {
+  background-color: #28a745; /* Green */
+}
+
+/* Icons inside buttons */
+.floating-btn i {
+  font-size: 20px;
+}
+
+/* Add Property button */
+/* Add Property Button */
+.btn-add-property {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  background-color: #ffd900; /* Blue */
+  color: white;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 50px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  transition: background-color 0.3s, transform 0.2s ease;
+  border: none; /* No border */
+  cursor: pointer;
+  animation: blink 1s infinite; /* Blink every second */
+}
+
+/* Hover effect on button */
+.btn-add-property:hover {
+  background-color: #ffd900; /* Darker blue */
+  transform: translateY(-3px); /* Slight lift effect */
+}
+
+/* Active effect when button is clicked */
+.btn-add-property:active {
+  background-color: #ffd900; /* Even darker blue */
+  transform: translateY(0); /* Reset the lift effect */
+}
+
+/* Icon inside Add Property button */
+.btn-add-property i {
+  margin-right: 8px;
+}
+
+/* Blink animation */
+@keyframes blink {
+  0% {
+    opacity: 1; /* Fully visible */
+  }
+  50% {
+    opacity: 0; /* Completely invisible */
+  }
+  100% {
+    opacity: 1; /* Fully visible again */
+  }
+}
+
+/* Dropdown container for Add Property */
+.dropdown-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background-color: #fffef9;
+  border-radius: 8px;
+  padding: 10px 0;
+  position: absolute;
+  top: 100%; /* Position it below the button */
+  left: 0;
+  min-width: 160px;
+  z-index: 10;
+}
+
+/* Dropdown item styling */
+.dropdown-item {
+  padding: 8px 16px;
+  color: black;
+  text-decoration: none;
+  font-size: 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+/* Dropdown item hover effect */
+.dropdown-item:hover {
+  background-color: #ffffff; /* Darker blue on hover */
+}
+
+/* Media query for responsive design */
+@media (max-width: 767px) {
+  .btn-add-property {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+}

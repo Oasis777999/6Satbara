@@ -1,0 +1,39 @@
+{
+  "project": {
+    "name": "Green Valley",
+    "phase": "Phase 24",
+    "description": "Choosing the ideal vacation home is an important decision. After all, a home even if just for a holiday is not just a place to live or visit but a place where you can escape and create your own little world. Far away from the grind of city life. A place where dreams are born and memories are cherished and for the connoisseurs of living well, a home has to be sanctuary!"
+  },
+  "landmark": {
+    "title": "Nearby Landmark Details",
+    "location": "At Supe-Baramati Road."
+  },
+  "facilities": {
+    "title": "Facilities",
+    "items": [
+      "Demarcated with barbed wire fencing & Gate.",
+      "MSCB Connection",
+      "Individual sale deed & 7/12.",
+      "Plantation per plot by TRS Developers",
+      "Water Supply Connection",
+      "30fts wide internal roads"
+    ]
+  },
+  "gallery": {
+    "title": "Project Gallery",
+    "images": [
+      "https://castledreamspace.com/wp-content/uploads/2021/02/NA-Sanctioned-and-Developed-Plotting.jpg",
+      "https://castledreamspace.com/wp-content/uploads/2021/02/NA-Sanctioned-and-Developed-Plotting.jpg",
+      "https://castledreamspace.com/wp-content/uploads/2021/02/NA-Sanctioned-and-Developed-Plotting.jpg",
+      "https://castledreamspace.com/wp-content/uploads/2021/02/NA-Sanctioned-and-Developed-Plotting.jpg",
+      "https://castledreamspace.com/wp-content/uploads/2021/02/NA-Sanctioned-and-Developed-Plotting.jpg",
+      "https://castledreamspace.com/wp-content/uploads/2021/02/NA-Sanctioned-and-Developed-Plotting.jpg",
+      "https://castledreamspace.com/wp-content/uploads/2021/02/NA-Sanctioned-and-Developed-Plotting.jpg",
+      "https://castledreamspace.com/wp-content/uploads/2021/02/NA-Sanctioned-and-Developed-Plotting.jpg",
+      "https://castledreamspace.com/wp-content/uploads/2021/02/NA-Sanctioned-and-Developed-Plotting.jpg",
+      "https://castledreamspace.com/wp-content/uploads/2021/02/NA-Sanctioned-and-Developed-Plotting.jpg",
+      "https://castledreamspace.com/wp-content/uploads/2021/02/NA-Sanctioned-and-Developed-Plotting.jpg",
+      "https://castledreamspace.com/wp-content/uploads/2021/02/NA-Sanctioned-and-Developed-Plotting.jpg"
+    ]
+  }
+}
