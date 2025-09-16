@@ -59,6 +59,16 @@ const Sidebar = ({ onClose, setUser }) => {
           </Link>
         </li>
         <li className="nav-item">
+          <Link to="/inquiry" className="nav-link text-white">
+            Property Inquiries
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link to="/contactlist" className="nav-link text-white">
+            Contact Us leads
+          </Link>
+        </li>
+        <li className="nav-item">
           <Link to="/profile" className="nav-link text-white">
             Profile
           </Link>

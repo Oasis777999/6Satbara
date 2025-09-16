@@ -3,7 +3,7 @@ import api from "../../api/api";
 
 const PropertyForm = () => {
   const [formData, setFormData] = useState({
-    propertyType: "",
+    propertyType: "Residential",
     socity: "",
     minSize: "",
     maxSize: "",
@@ -206,7 +206,7 @@ const PropertyForm = () => {
           {[
             ["cornerProperty", "Corner Property"],
             ["gatedSocity", "Gated Society"],
-            ["isNegociable", "Price Negociable"],
+            ["isNegociable", "Price Negotiable"],
           ].map(([name, label]) => (
             <div className="col-md-4" key={name}>
               <label className="form-label">{label}</label>

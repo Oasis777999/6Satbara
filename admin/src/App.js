@@ -19,10 +19,14 @@ import FlatForm from "./Components/Flat/FlatForm";
 import FlatList from "./Components/Flat/FlatList";
 import UpdateFlat from "./Components/Flat/UpdateFlat";
 import FlatDetails from "./Components/Flat/FlatDetails";
+import Inquiry from "./Components/InquiryList";
+import InquiryTable from "./Components/InquiryTable";
 
 function App() {
   const [showSidebar, setShowSidebar] = useState(false);
-  const [user, setUser] = useState(() => JSON.parse(localStorage.getItem("user")));
+  const [user, setUser] = useState(() =>
+    JSON.parse(localStorage.getItem("user"))
+  );
 
   return (
     <BrowserRouter>
@@ -42,7 +46,10 @@ function App() {
                 top: 0,
               }}
             >
-              <Sidebar onClose={() => setShowSidebar(false)} setUser={setUser} />
+              <Sidebar
+                onClose={() => setShowSidebar(false)}
+                setUser={setUser}
+              />
             </div>
 
             {/* Main Content */}
@@ -69,6 +76,8 @@ function App() {
                 <Route path="/view/:id" element={<PropertyDetails />} />
                 <Route path="/flat/view/:id" element={<FlatDetails />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/inquiry" element={<Inquiry />} />
+                <Route path="/contactlist" element={<InquiryTable />} />
                 <Route path="*" element={<Navigate to="/addproperty" />} />
               </Routes>
             </div>

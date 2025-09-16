@@ -70,6 +70,7 @@ const PropertyInquiryForm = ({ propertyName = "" }) => {
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label className="fw-bold">Your Name</Form.Label>
+          <span className="text-danger">*</span>
           <Form.Control
             type="text"
             name="name"
@@ -81,6 +82,7 @@ const PropertyInquiryForm = ({ propertyName = "" }) => {
 
         <Form.Group className="mb-3">
           <Form.Label className="fw-bold">Phone Number</Form.Label>
+          <span className="text-danger">*</span>
           <Form.Control
             type="tel"
             name="phone"
@@ -92,6 +94,7 @@ const PropertyInquiryForm = ({ propertyName = "" }) => {
 
         <Form.Group className="mb-3">
           <Form.Label className="fw-bold">Email Address</Form.Label>
+          <span className="text-danger">*</span>
           <Form.Control
             type="email"
             name="email"
@@ -102,7 +105,7 @@ const PropertyInquiryForm = ({ propertyName = "" }) => {
         </Form.Group>
 
         <Form.Group className="mb-3">
-          <Form.Label className="fw-bold">Property Name</Form.Label>
+          <Form.Label className="fw-bold">Property Name (Default)</Form.Label>
           <Form.Control
             type="text"
             name="propertyName"

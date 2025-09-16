@@ -14,7 +14,7 @@ router.post("/add", async (req, res) => {
 
 router.get("/list", async (req, res) => {
   try {
-    const inquiry = await Inquiry.find();
+    const inquiry = await Inquiry.find({});
 
     res.status(200).send(inquiry);
   } catch (err) {

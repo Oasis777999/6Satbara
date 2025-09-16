@@ -1,22 +1,24 @@
 import { useState, useRef, useEffect } from "react";
-import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
+import { Navbar, Nav, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import logo from "../Assets/MS PROPERTY LOGO.png";
 
 const NavigationBar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [plotsDropdownOpen, setPlotsDropdownOpen] = useState(false);
+  const [navbarOpen, setNavbarOpen] = useState(false);
 
-  const dropdownRef = useRef(null); // Add Property dropdown ref
-  const plotsDropdownRef = useRef(null); // Plots / Flats dropdown ref
+  const dropdownRef = useRef(null);
+  const plotsDropdownRef = useRef(null);
+  const navbarRef = useRef(null);
 
   // Toggle Add Property dropdown
-  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+  const toggleDropdown = () => setDropdownOpen((prev) => !prev);
 
   // Toggle Plots / Flats dropdown
-  const togglePlotsDropdown = () => setPlotsDropdownOpen(!plotsDropdownOpen);
+  const togglePlotsDropdown = () => setPlotsDropdownOpen((prev) => !prev);
 
-  // Close dropdowns when clicking outside
+  // Close dropdowns and navbar when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -32,14 +34,25 @@ const NavigationBar = () => {
       ) {
         setPlotsDropdownOpen(false);
       }
+
+      if (
+        navbarRef.current &&
+        !navbarRef.current.contains(event.target)
+      ) {
+        setNavbarOpen(false);
+      }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  // Close navbar on nav link click (mobile)
+  const handleNavLinkClick = () => {
+    setNavbarOpen(false);
+    setDropdownOpen(false);
+    setPlotsDropdownOpen(false);
+  };
 
   return (
     <Navbar bg="white" expand="lg" fixed="top" className="shadow-sm">
@@ -51,69 +64,80 @@ const NavigationBar = () => {
           style={{ whiteSpace: "nowrap" }}
         >
           <img src={logo} alt="logo" height={60} width={100} />
-          SATBARAA.COM
+          M.S. Properties
         </Navbar.Brand>
 
-        <Navbar.Toggle aria-controls="navbar-nav" />
-        <Navbar.Collapse id="navbar-nav">
-          <Nav className="ms-auto fw-semibold text-center text-lg-start">
-            <Nav.Link as={Link} to="/" className="mx-lg-2 mx-1">
+        <Navbar.Toggle
+          aria-controls="navbar-nav"
+          onClick={() => setNavbarOpen(!navbarOpen)}
+        />
+
+        <Navbar.Collapse
+          in={navbarOpen}
+          id="navbar-nav"
+          ref={navbarRef}
+          className="justify-content-end"
+        >
+          <Nav className="fw-semibold text-center text-lg-start">
+            <Nav.Link as={Link} to="/" onClick={handleNavLinkClick} className="mx-lg-2 mx-1">
               Home
             </Nav.Link>
 
             {/* Plots / Flats Dropdown */}
             <div className="nav-item dropdown" ref={plotsDropdownRef}>
-              <button
+              <span
                 className="nav-link"
                 onClick={togglePlotsDropdown}
-                aria-expanded={plotsDropdownOpen ? "true" : "false"}
+                role="button"
+                aria-expanded={plotsDropdownOpen}
+                style={{ cursor: "pointer" }}
               >
                 Plots / Flats
-              </button>
-
+              </span>
               {plotsDropdownOpen && (
                 <div className="dropdown-menu show">
-                  <Link to="/Residential" className="dropdown-item">
+                  <Link to="/Residential" className="dropdown-item" onClick={handleNavLinkClick}>
                     Residential
                   </Link>
-                  <Link to="/Commercial" className="dropdown-item">
+                  <Link to="/Commercial" className="dropdown-item" onClick={handleNavLinkClick}>
                     Commercial
                   </Link>
-                  <Link to="/Agriculture" className="dropdown-item">
+                  <Link to="/Agriculture" className="dropdown-item" onClick={handleNavLinkClick}>
                     Agriculture
                   </Link>
-                  <NavDropdown.Divider />
-                  <Link to="/flat" className="dropdown-item">
+                  <div className="dropdown-divider" />
+                  <Link to="/flat" className="dropdown-item" onClick={handleNavLinkClick}>
                     Flats
                   </Link>
                 </div>
               )}
             </div>
 
-            <Nav.Link as={Link} to="/about" className="mx-lg-2 mx-1">
+            <Nav.Link as={Link} to="/about" onClick={handleNavLinkClick} className="mx-lg-2 mx-1">
               About
             </Nav.Link>
 
-            <Nav.Link as={Link} to="/contactus" className="mx-lg-2 mx-1">
+            <Nav.Link as={Link} to="/contactus" onClick={handleNavLinkClick} className="mx-lg-2 mx-1">
               Contact
             </Nav.Link>
 
             {/* Add Property Dropdown */}
             <div className="nav-item dropdown" ref={dropdownRef}>
-              <button
-                className="nav-link btn-add-property"
+              <span
+                className="nav-link"
                 onClick={toggleDropdown}
-                aria-expanded={dropdownOpen ? "true" : "false"}
+                role="button"
+                aria-expanded={dropdownOpen}
+                style={{ cursor: "pointer" }}
               >
                 Add Your Property
-              </button>
-
+              </span>
               {dropdownOpen && (
                 <div className="dropdown-menu show">
-                  <Link to="/addproperty" className="dropdown-item">
+                  <Link to="/addproperty" className="dropdown-item" onClick={handleNavLinkClick}>
                     Add Plot
                   </Link>
-                  <Link to="/addflat" className="dropdown-item">
+                  <Link to="/addflat" className="dropdown-item" onClick={handleNavLinkClick}>
                     Add Flat
                   </Link>
                 </div>

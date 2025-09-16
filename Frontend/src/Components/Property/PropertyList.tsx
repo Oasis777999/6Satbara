@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Container, Card, Row, Col } from "react-bootstrap";
 import api from "../../api/api";
 import { useNavigate, useParams } from "react-router-dom";
+import { FcApproval } from "react-icons/fc"; // if using verified badge
 
 const PropertyList = () => {
   const { selectedType } = useParams();
@@ -18,14 +19,12 @@ const PropertyList = () => {
     const selectedTaluka = event.target.value;
     setTaluka(selectedTaluka);
   };
+  
 
   const getData = async () => {
     try {
       const result = await api.get("/property/list");
-      const fetchedProperties = result.data.data;
-
-      console.log(fetchedProperties);
-      
+      const fetchedProperties = result.data.data;      
 
       // Filter by selected type if present
       let filtered = selectedType
@@ -39,9 +38,6 @@ const PropertyList = () => {
       if (taluka) {
         filtered = filtered.filter((property) => property.taluka === taluka);
       }
-
-      console.log(filtered);
-      
 
       setProperties(filtered);
     } catch (error) {
@@ -142,6 +138,7 @@ const PropertyList = () => {
                     <Card.Body>
                       <Card.Title className="fs-5 mb-2 fw-bold">
                         {property.socity || "Untitled Property"}
+                        {property.verified && <FcApproval />}
                       </Card.Title>
 
                       <p className="mb-2">

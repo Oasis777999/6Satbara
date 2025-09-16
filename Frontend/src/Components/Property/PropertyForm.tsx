@@ -213,7 +213,7 @@ const PropertyForm = () => {
           {[
             ["cornerProperty", "Corner Property"],
             ["gatedSocity", "Gated Society"],
-            ["isNegociable", "Price Negociable"],
+            ["isNegociable", "Price negotiable"],
           ].map(([name, label]) => (
             <div className="col-md-6" key={name}>
               <label className="form-label">{label}</label>

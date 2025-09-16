@@ -240,7 +240,7 @@ const FlatForm = () => {
           {/* Boolean Dropdowns */}
           {[
             ["gatedSocity", "Gated Society"],
-            ["isNegociable", "Price Negotiable"],
+            ["isNegociable", "Price negotiable"],
             ["reraStatus", "Rera Status"],
           ].map(([name, label]) => (
             <div className="col-md-4" key={name}>
