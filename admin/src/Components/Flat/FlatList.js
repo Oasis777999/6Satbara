@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import api from "../../api/api";
 import { useNavigate } from "react-router-dom";
+import { Spinner, Container } from "react-bootstrap";
 
 const FlatList = () => {
   const [flats, setFlats] = useState([]);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   const getFlats = async () => {
     try {
@@ -12,6 +14,8 @@ const FlatList = () => {
       setFlats(result.data.data);
     } catch (error) {
       console.error("Failed to fetch flat list:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -72,6 +76,7 @@ const FlatList = () => {
               <th>Action</th>
             </tr>
           </thead>
+
           <tbody>
             {flats.map((flat, index) => (
               <tr key={flat._id}>
@@ -111,9 +116,7 @@ const FlatList = () => {
                     </option>
                   </select>
                 </td>
-                <td>
-                  {flat.user?.name}
-                </td>
+                <td>{flat.user?.name}</td>
                 <td>{flat.user?.phone}</td>
                 <td>
                   <button
@@ -144,6 +147,7 @@ const FlatList = () => {
                 </td>
               </tr>
             )}
+
           </tbody>
         </table>
       </div>
