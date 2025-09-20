@@ -6,7 +6,6 @@ const Flat = require("../Models/Flats");
 router.post("/add", async (req, res) => {
   try {    
     const flat = new Flat(req.body);
-    console.log(req.body);
     
     
     const savedFlat = await flat.save();

@@ -1,22 +1,35 @@
 import React, { useEffect, useState } from "react";
 import api from "../../api/api";
 import { useNavigate } from "react-router-dom";
-import { Spinner, Container } from "react-bootstrap";
 
 const FlatList = () => {
   const [flats, setFlats] = useState([]);
+  const [filterdData, setFilterdData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
 
   const getFlats = async () => {
     try {
       const result = await api.get("/flat/list"); // Adjust this to your actual endpoint
       setFlats(result.data.data);
+      setFilterdData(result.data.data);
     } catch (error) {
       console.error("Failed to fetch flat list:", error);
-    } finally {
-      setLoading(false);
     }
+  };
+
+  const handleSearch = (e) => {
+    const value = e.target.value.toLowerCase();
+    setSearchQuery(value);
+
+    const filtered = flats.filter((row) =>
+      Object.values(row).some((cell) =>
+        cell?.toString().toLowerCase().includes(value)
+      )
+    );
+
+    setFilterdData(filtered);
   };
 
   const deleteFlat = async (id) => {
@@ -51,11 +64,22 @@ const FlatList = () => {
 
   useEffect(() => {
     getFlats();
-  }, [flats]);
+  }, []);
 
   return (
     <div className="p-4">
-      <h2>Flat List</h2>
+      <div className="row sticky-top bg-white align-items-center py-4">
+        <h2>Flat List</h2>
+        <div className="col-md-6 mb-2 mb-md-0">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="🔍 Search by socity, city, etc..."
+            value={searchQuery}
+            onChange={handleSearch}
+          />
+        </div>
+      </div>
       <div className="table-responsive mt-3">
         <table className="table border table-striped">
           <thead className="thead-dark">
@@ -78,7 +102,7 @@ const FlatList = () => {
           </thead>
 
           <tbody>
-            {flats.map((flat, index) => (
+            {filterdData.map((flat, index) => (
               <tr key={flat._id}>
                 <td>{index + 1}</td>
                 <td>{flat.socity}</td>
@@ -147,7 +171,6 @@ const FlatList = () => {
                 </td>
               </tr>
             )}
-
           </tbody>
         </table>
       </div>

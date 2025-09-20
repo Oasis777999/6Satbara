@@ -15,9 +15,9 @@ const Sidebar = ({ onClose, setUser }) => {
   if (!user) return null;
 
   return (
-    <nav className="p-3 h-100 bg-dark text-white">
+    <nav className="p-3 h-100 bg-dark text-white " onClick={onClose}>
       {/* Close Button for mobile */}
-      <div className="d-flex justify-content-between align-items-center mb-3 d-md-none">
+      <div className="d-flex justify-content-between align-items-center mb-3 d-md-none ">
         <h5 className="mb-0">Menu</h5>
         <button className="btn btn-sm btn-light" onClick={onClose}>
           ✕

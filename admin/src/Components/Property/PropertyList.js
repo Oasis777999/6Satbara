@@ -4,15 +4,32 @@ import { useNavigate } from "react-router-dom";
 
 const PropertyList = () => {
   const [properties, setProperties] = useState([]);
+  const [filterdData, setFilterdData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+
   const navigate = useNavigate();
 
   const getProperties = async () => {
     try {
       const result = await api.get("/property/list");
       setProperties(result.data.data);
+      setFilterdData(result.data.data);
     } catch (error) {
       console.error("Failed to fetch property list:", error);
     }
+  };
+
+  const handleSearch = (e) => {
+    const value = e.target.value.toLowerCase();
+    setSearchQuery(value);
+
+    const filtered = properties.filter((row) =>
+      Object.values(row).some((cell) =>
+        cell?.toString().toLowerCase().includes(value)
+      )
+    );
+
+    setFilterdData(filtered);
   };
 
   const DeleteProperty = async (id) => {
@@ -53,17 +70,28 @@ const PropertyList = () => {
 
   return (
     <div className="p-4">
-      <h2>Property List</h2>
+      <div className="row sticky-top bg-white align-items-center py-4">
+        <h2>PropertyList List</h2>
+        <div className="col-md-6 mb-2 mb-md-0">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="🔍 Search by socity, city, etc..."
+            value={searchQuery}
+            onChange={handleSearch}
+          />
+        </div>
+      </div>
       <div className="table-responsive mt-3">
         <table className="table border table-striped">
           <thead className="thead-dark">
             <tr>
-              <th>Sr.No</th>  
+              <th>Sr.No</th>
               <th>Property Type</th>
               <th>Society</th>
               <th>Min. Size (Sq.Ft.)</th>
               <th>Max. Size (Sq.Ft.) (ft)</th>
-              <th>Price  Per Sq.Ft.</th>
+              <th>Price Per Sq.Ft.</th>
               <th>City</th>
               <th>Verification Status</th>
               <th>Owner Name</th>
@@ -72,7 +100,7 @@ const PropertyList = () => {
             </tr>
           </thead>
           <tbody>
-            {properties.map((item, index) => (
+            {filterdData.map((item, index) => (
               <tr key={item._id}>
                 <td>{index + 1}</td>
                 <td>{item.propertyType}</td>
