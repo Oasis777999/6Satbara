@@ -71,7 +71,7 @@ const PropertyList = () => {
   return (
     <div className="p-4">
       <div className="row sticky-top bg-white align-items-center py-4">
-        <h2>PropertyList List</h2>
+        <h2>Property List</h2>
         <div className="col-md-6 mb-2 mb-md-0">
           <input
             type="text"

@@ -61,6 +61,8 @@ router.delete("/delete/:id", async (req, res) => {
 router.put("/update/:id", async (req, res) => {
   try {
     const id = req.params.id; // ✅ Extract just the id string
+    console.log(req.body);
+    
     
     const updatedFlat = await Flat.findByIdAndUpdate(
       id,

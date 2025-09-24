@@ -62,6 +62,23 @@ const FlatList = () => {
     }
   };
 
+  const togglePremium = async (flatId, newStatus) => {
+    console.log(newStatus);
+
+    try {
+      const res = await api.put(`/flat/update/${flatId}`, {
+        isPremium: newStatus,
+      });
+      if (res.status === 200) {
+        alert("Premium status updated");
+        getFlats();
+      }
+    } catch (error) {
+      console.error("Failed to update status:", error);
+      alert("Error updating status");
+    }
+  };
+
   useEffect(() => {
     getFlats();
   }, []);
@@ -95,6 +112,7 @@ const FlatList = () => {
               <th>Price</th>
               <th>City</th>
               <th>Verification</th>
+              <th>Primium Property</th>
               <th>Owner Name</th>
               <th>Owner Contact</th>
               <th>Action</th>
@@ -137,6 +155,29 @@ const FlatList = () => {
                     </option>
                     <option value="Pending" className="text-warning">
                       Pending
+                    </option>
+                  </select>
+                </td>
+                <td>
+                  <select
+                    className={`form-select form-select-sm ${
+                      flat.isPremium ? "text-success" : "text-warning"
+                    }`}
+                    value={flat.isPremium ? "Yes" : "No"}
+                    onChange={(e) =>
+                      togglePremium(flat._id, e.target.value === "Yes")
+                    }
+                    style={{
+                      width: "auto",
+                      fontWeight: "bold",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <option value="Yes" className="text-success">
+                      Yes
+                    </option>
+                    <option value="No" className="text-warning">
+                      No
                     </option>
                   </select>
                 </td>

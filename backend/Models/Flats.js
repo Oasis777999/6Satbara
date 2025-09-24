@@ -1,102 +1,109 @@
 const mongoose = require("mongoose");
 
-const flatsSchema = new mongoose.Schema({
-    socity:{
-        type:String
+const flatsSchema = new mongoose.Schema(
+  {
+    socity: {
+      type: String,
     },
-    apartmentName:{
-        type:String
+    apartmentName: {
+      type: String,
     },
-    flatNumber:{
-        type:String
+    flatNumber: {
+      type: String,
     },
-    floor:{
-        type:Number
+    floor: {
+      type: Number,
     },
-    totalFloors:{
-        type:Number
+    totalFloors: {
+      type: Number,
     },
-    bedrooms:{
-        type:Number
+    bedrooms: {
+      type: Number,
     },
-    bathrooms:{
-        type:Number
+    bathrooms: {
+      type: Number,
     },
-    balconies:{
-        type:Number
+    balconies: {
+      type: Number,
     },
-    furnishing:{
-        type:String,
-        default:"Unfurnished"
+    furnishing: {
+      type: String,
+      default: "Unfurnished",
     },
-    carpetArea:{
-        type:Number
+    carpetArea: {
+      type: Number,
     },
-    builtupArea:{
-        type: Number
+    builtupArea: {
+      type: Number,
     },
-    possession:{
-        type:Date
+    possession: {
+      type: Date,
     },
-    facing:{
-        type:String
+    facing: {
+      type: String,
     },
-    price:{
-        type:Number
+    price: {
+      type: Number,
     },
-    isNegociable:{
-        type:Boolean,
-        default:false
+    isNegociable: {
+      type: Boolean,
+      default: false,
     },
-    maintenanceCost:{
-        type:String
+    maintenanceCost: {
+      type: String,
     },
-    gatedSocity:{
-        type:Boolean,
-        default:false
+    gatedSocity: {
+      type: Boolean,
+      default: false,
     },
-    parking:{
-        type:String
+    parking: {
+      type: String,
     },
-    reraStatus:{
-        type:Boolean
+    reraStatus: {
+      type: Boolean,
     },
-    reraNumber:{
-        type:String
+    reraNumber: {
+      type: String,
     },
-    address:{
-        type:String
+    address: {
+      type: String,
     },
-    city:{
-        type:String
+    city: {
+      type: String,
     },
-    taluka:{
-        type:String
+    taluka: {
+      type: String,
     },
-    district:{
-        type:String
+    district: {
+      type: String,
     },
-    state:{
-        type:String
+    state: {
+      type: String,
     },
-    pincode:{
-        type:Number
+    pincode: {
+      type: Number,
     },
-    about:{
-        type:String
+    about: {
+      type: String,
     },
-    images:{
-        type:[String],
-        default:[]
+    images: {
+      type: [String],
+      default: [],
     },
-    user:{
-        type:Object
+    user: {
+      type: Object,
     },
-    verified:{
-        type:Boolean,
-        default:false
-    }
-}, {timestamps:true});
+    verified: {
+      type: Boolean,
+      default: false,
+    },
+    isPremium: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  { timestamps: true }
+);
 
 const apartmentFlat = mongoose.model("apartmentFlat", flatsSchema);
 

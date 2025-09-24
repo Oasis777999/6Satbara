@@ -32,7 +32,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    to="/project"
+                    to="/property"
                     className="text-white text-decoration-none d-block mb-1"
                   >
                     Projects
