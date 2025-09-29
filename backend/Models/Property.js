@@ -2,23 +2,23 @@ const mongoose = require("mongoose");
 
 const propertySchema = new mongoose.Schema(
   {
-    propertyType:{
-      type:String
+    propertyType: {
+      type: String,
     },
     socity: {
       type: String,
     },
-    minSize:{
-      type:Number
+    minSize: {
+      type: Number,
     },
-    maxSize:{
-      type:Number
+    maxSize: {
+      type: Number,
     },
     price: {
-      type: Number
+      type: Number,
     },
-    isNegociable:{ 
-      type:Boolean
+    isNegociable: {
+      type: Boolean,
     },
     address: {
       type: String,
@@ -38,9 +38,9 @@ const propertySchema = new mongoose.Schema(
     pincode: {
       type: String,
     },
-    mapLocation:{
-      type:String,
-      default:"NA"
+    mapLocation: {
+      type: String,
+      default: "NA",
     },
     facing: {
       type: String,
@@ -57,17 +57,21 @@ const propertySchema = new mongoose.Schema(
     description: {
       type: String,
     },
-    verified:{
-      type:Boolean,
-      default:false
+    verified: {
+      type: Boolean,
+      default: false,
+    },
+    isPremium: {
+      type: Boolean,
+      default: false,
     },
     images: {
       type: [String],
       default: [],
     },
-    user:{
-      type:Object
-    }
+    user: {
+      type: Object,
+    },
   },
   { timestamps: true }
 );

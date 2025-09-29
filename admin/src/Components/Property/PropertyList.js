@@ -47,9 +47,9 @@ const PropertyList = () => {
     }
   };
 
-  const toggleVerification = async (userId, newStatus) => {
+  const toggleVerification = async (propertyId, newStatus) => {
     try {
-      const res = await api.put(`/property/update/${userId}`, {
+      const res = await api.put(`/property/update/${propertyId}`, {
         verified: newStatus,
       });
 
@@ -57,6 +57,24 @@ const PropertyList = () => {
         alert("Verification status updated");
         // Refresh list after update
         getProperties(); // You already have this in your code
+      }
+    } catch (error) {
+      console.error("Failed to update status:", error);
+      alert("Error updating status");
+    }
+  };
+
+  const togglePremium = async (propertyId, newStatus) => {
+    console.log(newStatus);
+
+    try {
+      const res = await api.put(`/property/update/${propertyId}`, {
+        isPremium: newStatus,
+      });
+      console.log(res);
+      if (res.status === 200) {
+        alert("Premium status updated");
+        getProperties();
       }
     } catch (error) {
       console.error("Failed to update status:", error);
@@ -94,6 +112,7 @@ const PropertyList = () => {
               <th>Price Per Sq.Ft.</th>
               <th>City</th>
               <th>Verification Status</th>
+              <th>Premium Property</th>
               <th>Owner Name</th>
               <th>Owner Contact</th>
               <th>Action</th>
@@ -135,6 +154,31 @@ const PropertyList = () => {
                     </option>
                   </select>
                 </td>
+
+                <td>
+                  <select
+                    className={`form-select form-select-sm ${
+                      item.isPremium ? "text-success" : "text-warning"
+                    }`}
+                    value={item.isPremium ? "Yes" : "No"}
+                    onChange={(e) =>
+                      togglePremium(item._id, e.target.value === "Yes")
+                    }
+                    style={{
+                      width: "auto",
+                      fontWeight: "bold",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <option value="Yes" className="text-success">
+                      Yes
+                    </option>
+                    <option value="No" className="text-warning">
+                      No
+                    </option>
+                  </select>
+                </td>
+
                 <td>{item.user?.name} </td>
                 <td>{item.user?.phone}</td>
 

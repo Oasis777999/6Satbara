@@ -57,7 +57,7 @@ const FlatList = () => {
         getFlats();
       }
     } catch (error) {
-      console.error("Failed to update status:", error);
+      console.error("Failed to update status:",  error);
       alert("Error updating status");
     }
   };

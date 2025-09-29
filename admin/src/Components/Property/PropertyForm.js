@@ -79,7 +79,7 @@ const PropertyForm = () => {
     const promises = files.map((file) => {
       return new Promise((resolve, reject) => {
         if (file.size > maxSize) {
-          reject(`${file.name} exceeds 200kb`);
+          reject(`${file.name} exceeds 1000kb`);
           return;
         }
         const reader = new FileReader();

@@ -89,7 +89,7 @@ const UpdateFlat = () => {
     const promises = files.map((file) => {
       return new Promise((resolve, reject) => {
         if (file.size > maxSize) {
-          reject(`${file.name} exceeds 200 KB`);
+          reject(`${file.name} exceeds 1000 KB`);
           return;
         }
         const reader = new FileReader();
