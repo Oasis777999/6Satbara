@@ -2,21 +2,21 @@ import React, { useEffect, useState } from "react";
 import api from "../../api/api";
 import { useNavigate } from "react-router-dom";
 
-const PremiumFlatsCarousel = () => {
-  const [flats, setFlats] = useState([]);
+const PremiumPropertyCarousel = () => {
+  const [properties, setProperties] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     api
-      .get("/flat/list")
-      .then((res) => setFlats(res.data.data))
+      .get("/property/list")
+      .then((res) => setProperties(res.data.data))
       .catch((err) => console.error(err));
   }, []);
 
-  const premiumFlats = flats.filter((flat) => flat.isPremium===true && flat.verified===true);
+  const premiumProperties = properties.filter((property) => property.isPremium==true && property.verified==true);
 
   // Group the flats into chunks of 3
-  const chunkFlats = (arr, size) => {
+  const chunkProperties = (arr, size) => {
     const chunks = [];
     for (let i = 0; i < arr.length; i += size) {
       chunks.push(arr.slice(i, i + size));
@@ -24,68 +24,68 @@ const PremiumFlatsCarousel = () => {
     return chunks;
   };
 
-  const groupedFlats = chunkFlats(premiumFlats, 3);
+  const groupedProperties = chunkProperties(premiumProperties, 3);
 
-  if (premiumFlats.length === 0) {
-    return <p className="text-center mt-4">No premium flats available.</p>;
+  if (premiumProperties.length === 0) {
+    return <p className="text-center mt-4"></p>;
   }
 
   return (
     <div className="container my-5 rounded shadow p-3">
-      <h2 className="text-center mb-4">Premium Flats</h2>
+      <h2 className="text-center mb-4">Premium Properties</h2>
 
       <div
-        id="premiumFlatsCarousel"
+        id="premiumPropertyCarousel"
         className="carousel slide"
         data-bs-ride="carousel"
         data-bs-interval="3000" // auto-slide every 4 seconds
       >
         <div className="carousel-inner">
-          {groupedFlats.map((group, groupIndex) => (
+          {groupedProperties.map((group, groupIndex) => (
             <div
               className={`carousel-item ${groupIndex === 0 ? "active" : ""}`}
               key={groupIndex}
             >
               <div className="row">
-                {group.map((flat, index) => (
+                {group.map((property, index) => (
                   <div className="col-md-4" key={index}>
                     <div className="card shadow-sm mb-4">
-                      {flat.images && flat.images.length > 0 && (
+                      {property.images && property.images.length > 0 && (
                         <img
-                          src={flat.images[0]}
+                          src={property.images[0]}
                           className="card-img-top"
-                          alt={`Flat ${flat.flatNumber}`}
+                          alt={`Flat ${property.flatNumber}`}
                           style={{ height: "200px", objectFit: "cover" }}
                         />
                       )}
                       <div className="card-body">
                         <h5 className="card-title">
-                          {flat.apartmentName} - {flat.socity}
+                          {property.apartmentName} - {property.socity}
                         </h5>
                         <p className="card-text">
-                          <strong>Flat:</strong> {flat.flatNumber}, Floor{" "}
-                          {flat.floor}/{flat.totalFloors}
+                          <strong>Flat:</strong> {property.flatNumber}, Floor{" "}
+                          {property.floor}/{property.totalFloors}
                           <br />
-                          <strong>Bedrooms:</strong> {flat.bedrooms} |{" "}
-                          <strong>Bathrooms:</strong> {flat.bathrooms}
+                          <strong>Bedrooms:</strong> {property.bedrooms} |{" "}
+                          <strong>Bathrooms:</strong> {property.bathrooms}
                           <br />
-                          <strong>Furnishing:</strong> {flat.furnishing}
+                          <strong>Furnishing:</strong> {property.furnishing}
                           <br />
-                          <strong>Carpet Area:</strong> {flat.carpetArea} sq.ft
+                          <strong>Carpet Area:</strong> {property.carpetArea} sq.ft
                           <br />
                           <strong>Price:</strong> ₹
-                          {flat.price?.toLocaleString()}{" "}
-                          {flat.isNegociable && "(Negotiable)"}
+                          {property.price?.toLocaleString()}{" "}
+                          {property.isNegociable && "(Negotiable)"}
                           <br />
-                          <strong>Location:</strong> {flat.address}, {flat.city}
-                          , {flat.state} - {flat.pincode}
+                          <strong>Location:</strong> {property.address}, {property.city}
+                          , {property.state} - {property.pincode}
                         </p>
                         <p className="text-muted">
-                          {flat.about?.slice(0, 80)}...
+                          {property.about?.slice(0, 80)}...
                         </p>
                         <button
                           className="btn btn-success mt-2"
-                          onClick={() => navigate(`/flat/${flat._id}`)}
+                          onClick={() => navigate(`/flat/${property._id}`)}
                         >
                           See More...
                         </button>
@@ -102,7 +102,7 @@ const PremiumFlatsCarousel = () => {
         <button
           className="carousel-control-prev"
           type="button"
-          data-bs-target="#premiumFlatsCarousel"
+          data-bs-target="#premiumPropertyCarousel"
           data-bs-slide="prev"
         >
           <span
@@ -113,7 +113,7 @@ const PremiumFlatsCarousel = () => {
         <button
           className="carousel-control-next"
           type="button"
-          data-bs-target="#premiumFlatsCarousel"
+          data-bs-target="#premiumPropertyCarousel"
           data-bs-slide="next"
         >
           <span
@@ -126,4 +126,4 @@ const PremiumFlatsCarousel = () => {
   );
 };
 
-export default PremiumFlatsCarousel;
+export default PremiumPropertyCarousel;

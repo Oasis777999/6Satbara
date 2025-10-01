@@ -80,18 +80,18 @@ const Contact = () => {
                 <Col md={4} className="text-center">
                   <Phone className="text-primary mb-2" size={40} />
                   <h6 className="fw-semibold">Call Us</h6>
-                  <p className="text-muted mb-0">(555) 123-4567</p>
+                  <p className="text-muted mb-0">+91 91759 82712</p>
                 </Col>
                 <Col md={4} className="text-center">
                   <Mail className="text-primary mb-2" size={40} />
                   <h6 className="fw-semibold">Email Us</h6>
-                  <p className="text-muted mb-0">info@primelanddealers.com</p>
+                  <p className="text-muted mb-0">msproperty136@gmail.com</p>
                 </Col>
                 <Col md={4} className="text-center">
                   <MapPin className="text-primary mb-2" size={40} />
                   <h6 className="fw-semibold">Visit Us</h6>
                   <p className="text-muted mb-0">
-                    123 Land Dealer St, City, State 12345
+                    Office No. 3, Madur Preet Building, <br/> Bhekrai Nagar, Pune-412308
                   </p>
                 </Col>
               </Row>

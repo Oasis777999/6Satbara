@@ -124,7 +124,7 @@ const NavigationBar = () => {
             {/* Add Property Dropdown */}
             <div className="nav-item dropdown" ref={dropdownRef}>
               <span
-                className="nav-link"
+                className="nav-link blinking-button"
                 onClick={toggleDropdown}
                 role="button"
                 aria-expanded={dropdownOpen}

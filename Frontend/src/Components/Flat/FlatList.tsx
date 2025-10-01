@@ -24,6 +24,11 @@ const FlatList = () => {
       const result = await api.get("/flat/list");
       let fetchedFlats = result.data.data;
 
+      // List only the verified flats
+      fetchedFlats = fetchedFlats.filter((flat) =>
+        flat.verified == true
+      );
+
       setAllFlats(fetchedFlats);
 
       if (taluka) {
@@ -136,8 +141,7 @@ const FlatList = () => {
                         <strong>Price:</strong> ₹ {flat.price} L
                       </p>
                       <p className="mb-2">
-                        <strong>Area:</strong>{" "}
-                        {flat.builtupArea} Sq. Ft.
+                        <strong>Area:</strong> {flat.builtupArea} Sq. Ft.
                       </p>
                       <p className="mb-2">
                         <strong>Location:</strong> {flat.taluka}

@@ -1,6 +1,7 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FaLinkedin, FaWhatsapp, FaFacebookF } from "react-icons/fa";
+import AddProperty from "../utils/AddProperty";
 
 const Footer = () => {
   return (
@@ -12,7 +13,7 @@ const Footer = () => {
             <Col md={3}>
               <h5 className="text-uppercase fw-bold">Prime Land Dealers</h5>
               <p className="text-white-50 small">
-                Trusted land partner since 2008. We offer legal, verified land
+                Trusted land partner since 2015. We offer legal, verified land
                 plots with complete documentation and full support for your
                 investment.
               </p>
@@ -111,7 +112,7 @@ const Footer = () => {
                   <FaLinkedin size={20} />
                 </a>
                 <a
-                  href="https://facebook.com/yourusername" // replace with your Facebook page/profile URL
+                  href="https://www.facebook.com/share/16DyFpJ8Av/" // replace with your Facebook page/profile URL
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white"
@@ -147,9 +148,11 @@ const Footer = () => {
 
       {/* Contact Us */}
       <div className="floating-btn-group">
+        {/* Add Property*/}
+        <AddProperty />
         {/* WhatsApp Contact */}
         <a
-          href="https://wa.me/918317272136"
+          href="https://wa.me/919175982712"
           className="floating-btn btn-contact"
           target="_blank"
           rel="noopener noreferrer"
@@ -158,7 +161,7 @@ const Footer = () => {
         </a>
 
         {/* Call */}
-        <a href="tel:+918317272136" className="floating-btn btn-call">
+        <a href="tel:+919175982712" className="floating-btn btn-call">
           <i className="bi bi-telephone-fill"></i>
         </a>
       </div>

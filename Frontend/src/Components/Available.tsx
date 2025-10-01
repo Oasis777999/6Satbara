@@ -26,12 +26,12 @@ const Available = () => {
             {[
               {
                 title: "Luxury 2 & 3 BHK Apartments",
-                desc: "Spacious 2 & 3 BHK flats with modern interiors, modular kitchen, and balconies. Located in a gated society with clubhouse, pool, and 24/7 security. Starting from ₹45 lakhs.",
+                desc: "Spacious 2 & 3 BHK flats with modern interiors, modular kitchen, and balconies. ",
                 img: "https://www.adarshdevelopers.com/wp-content/uploads/2025/06/premia_thumb.png",
               },
               {
                 title: "Affordable Urban Flats",
-                desc: "Well-planned 1, 2 BHK flats perfect for families and working professionals. Close to schools, hospitals, and public transport. Prices start at ₹28 lakhs.",
+                desc: "Well-planned 1, 2 BHK flats perfect for families and working professionals. ",
                 img: "https://muppaprojects.com/wp-content/uploads/2022/02/premium-luxury-apartments-in-hyderabad-melody.jpg",
               },
             ].map((plot, index) => (

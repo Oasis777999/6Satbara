@@ -19,11 +19,11 @@ const About = () => {
             {/* Left Column */}
             <Col lg={6}>
               <h2 className="display-5 fw-bold mb-4">
-                15+ Years in Land Dealing
+                10+ Years in Land Dealing
               </h2>
               <p className="lead text-white-75 mb-4">
                 Prime Land Dealers has been helping families and businesses find
-                their perfect plot since 2008. Our expertise in land
+                their perfect properties since 2015. Our expertise in land
                 documentation, legal clearances, and fair pricing has made us
                 the most trusted name in land dealing.
               </p>
@@ -47,7 +47,7 @@ const About = () => {
                 <Col sm={4}>
                   <div className="d-flex flex-column align-items-center">
                     <Map size={36} className="mb-2" />
-                    <h4 className="fw-bold mb-0">15+</h4>
+                    <h4 className="fw-bold mb-0">10+</h4>
                     <small className="text-white-50">Years Experience</small>
                   </div>
                 </Col>

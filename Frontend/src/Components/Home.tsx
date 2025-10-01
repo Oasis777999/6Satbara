@@ -5,6 +5,7 @@ import Available from "./Available";
 import Features from "./Features";
 import AvailableProperties from "./AvailableProperties";
 import PremiumFlatsCarousel from "./Flat/PremiumFlatsCarousel ";
+import PremiumPropertyCarousel from "./Property/PremiumPropertyCarousel";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       {/* <Services /> */} {/* All services Comm, Agri, Resi*/}
       {/* <Available /> */} {/*Available flats Section*/}
       <AvailableProperties />
+      <PremiumPropertyCarousel/>
       <PremiumFlatsCarousel />
       <Features />
     </div>

@@ -16,7 +16,7 @@ const AvailableProperties = () => {
                 Recommended Properties
               </h2>
               <p className="lead text-muted">
-                Premium flats ready for immediate sale
+                Premium properties ready for immediate sale
               </p>
             </Col>
           </Row>
@@ -26,13 +26,13 @@ const AvailableProperties = () => {
             {[
               {
                 title: "Luxury 1, 2 & 3 BHK Apartments",
-                desc: "Spacious 1, 2 & 3 BHK flats with modern interiors, modular kitchen, and balconies. Located in a gated society with clubhouse, pool, and 24/7 security.",
+                desc: "Spacious 1, 2 & 3 BHK flats with modern interiors, modular kitchen, and balconies.",
                 img: "https://ik.imagekit.io/sjnshacs8/propertygallery/67765f6f904f3_1.webp",
                 path: "flat",
               },
               {
                 title: "Premium Agriculture, Commercial & Residential Plots",
-                desc: "Discover prime land for farming, business, or your dream home. Clear titles, great locations, and excellent investment potential.",
+                desc: "Discover prime land for farming, business, or your dream home. ",
                 img: "https://vtp-khadakwasla-plots.newlaunchproject.in/assets/images/slider/plotsimg.jpg",
                 path: "property",
               },

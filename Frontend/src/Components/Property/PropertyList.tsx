@@ -19,12 +19,11 @@ const PropertyList = () => {
     const selectedTaluka = event.target.value;
     setTaluka(selectedTaluka);
   };
-  
 
   const getData = async () => {
     try {
       const result = await api.get("/property/list");
-      const fetchedProperties = result.data.data;      
+      const fetchedProperties = result.data.data;
 
       // Filter by selected type if present
       let filtered = selectedType
@@ -32,6 +31,10 @@ const PropertyList = () => {
             (property) => property.propertyType === selectedType
           )
         : fetchedProperties;
+
+      // Only verified property will show
+
+      filtered = filtered.filter((property) => property.verified === true);
 
       setAllProperties(filtered);
 
@@ -89,13 +92,13 @@ const PropertyList = () => {
                 onChange={handleChange}
               >
                 <option value="">-- Choose a Location --</option>
-                {[...new Set(allProperties.map((property) => property.taluka))].map(
-                  (uniqueTaluka, index) => (
-                    <option key={index} value={uniqueTaluka}>
-                      {uniqueTaluka}
-                    </option>
-                  )
-                )}
+                {[
+                  ...new Set(allProperties.map((property) => property.taluka)),
+                ].map((uniqueTaluka, index) => (
+                  <option key={index} value={uniqueTaluka}>
+                    {uniqueTaluka}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
