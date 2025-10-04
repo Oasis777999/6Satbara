@@ -65,7 +65,7 @@ const UpdateProperty = () => {
 
   function convertToBase64Images(e) {
     const files = Array.from(e.target.files);
-    const maxSize = 200 * 1024;
+    const maxSize = 1000 * 1024;
 
     const promises = files.map((file) => {
       return new Promise((resolve, reject) => {
@@ -248,7 +248,7 @@ const UpdateProperty = () => {
               className="form-control"
             />
             <p className="text-danger h6">
-              Image size must be less than 200 kb
+              Image size must be less than 1000 kb
             </p>
 
             <div className="row mt-4">

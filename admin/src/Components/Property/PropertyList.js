@@ -84,7 +84,7 @@ const PropertyList = () => {
 
   useEffect(() => {
     getProperties();
-  }, [properties]);
+  }, []);
 
   return (
     <div className="p-4">

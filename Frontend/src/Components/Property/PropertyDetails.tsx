@@ -8,14 +8,17 @@ import PropertyInquiryForm from "../PropertyInquiryForm";
 const PropertyDetails = () => {
   const { id } = useParams();
   const [property, setProperty] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getData = async () => {
       try {
         const result = await api.get(`/property/single/${id}`);
         setProperty(result.data);
+        setLoading(false);
       } catch (error) {
         console.error("Failed to fetch property:", error);
+        setLoading(false);
       }
     };
 
@@ -49,13 +52,22 @@ const PropertyDetails = () => {
     images = [],
   } = property;
 
-  console.log(mapLocation);
-  
+  if (loading) {
+    return (
+      <div
+        className="container mt-5 py-5 text-center d-flex flex-column justify-content-center align-items-center"
+        style={{ minHeight: "100vh" }}
+      >
+        <div className="spinner-border text-primary" role="status" />
+        <p>Loading...</p>
+      </div>
+    );
+  }
 
   return (
-    <section className="py-5">
+    <section className="py-5 my-5">
       <Container>
-        <h3>Detailed information</h3>
+        <h3>Property Details</h3>
         <Card className="shadow-sm border-0">
           {images.length > 0 && (
             <Card.Img
@@ -67,122 +79,71 @@ const PropertyDetails = () => {
           )}
 
           <Card.Body>
-            <h3 className="fw-bold mb-3">
+            <h4 className="fw-bold">
               {socity || "Unnamed Property"}
               {verified && (
                 <Badge bg="success" className="ms-2">
                   Verified
                 </Badge>
               )}
-            </h3>
+            </h4>
+
+            <p className="mb-3 text-muted">Type: {propertyType || "N/A"}</p>
 
             <Row className="mb-3">
               <Col md={8}>
                 <Row className="mb-3">
                   <Col md={6}>
-                    <p>
-                      <strong>Property Type : </strong>
-                      {propertyType}
-                    </p>
+                    <strong>Minimum Size:</strong> {minSize} Sq.Ft.
+                  </Col>
+                  <Col md={6}>
+                    <strong>Maximum Size:</strong> {maxSize} Sq.Ft.
                   </Col>
                 </Row>
 
                 <Row className="mb-3">
                   <Col md={6}>
-                    <p>
-                      <strong>Minimun Size:</strong> {minSize} Sq.Ft.
-                    </p>
+                    <strong>Price:</strong> ₹ {price} per Sq.Ft.
+                    {isNegociable && <span> (Negotiable)</span>}
                   </Col>
                   <Col md={6}>
-                    <p>
-                      <strong>Maximum Size : </strong>
-                      { maxSize} Sq. Ft.
-                    </p>
+                    <strong>Open Sides:</strong> {openSide}
                   </Col>
                 </Row>
 
                 <Row className="mb-3">
                   <Col md={6}>
-                    <p>
-                      <strong>Price:</strong> ₹ {price} per Sq.Ft.
-                      {isNegociable && <span> (Negotiable) </span>}
-                    </p>
+                    <strong>Facing:</strong> {facing}
                   </Col>
                   <Col md={6}>
-                    <p>
-                      <strong>Open Sides:</strong> {openSide}
-                    </p>
+                    <strong>Corner Property:</strong>{" "}
+                    {cornerProperty ? "Yes" : "No"}
                   </Col>
                 </Row>
 
                 <Row className="mb-3">
                   <Col md={6}>
-                    <p>
-                      <strong>Facing:</strong> {facing}
-                    </p>
-                  </Col>
-                  <Col md={6}>
-                    <p>
-                      <strong>Corner Property:</strong>{" "}
-                      {cornerProperty ? "Yes" : "No"}
-                    </p>
+                    <strong>Gated Society:</strong> {gatedSocity ? "Yes" : "No"}
                   </Col>
                 </Row>
 
                 <Row className="mb-3">
-                  <Col md={6}>
+                  <Col md={12}>
+                    <strong>Address:</strong>
                     <p>
-                      <strong>Gated Society:</strong>{" "}
-                      {gatedSocity ? "Yes" : "No"}
+                      {address}, <br /> {city}, {taluka}, {district}, <br />{" "}
+                      {state} - {pincode}
                     </p>
                   </Col>
                 </Row>
-
-                <Row className="mb-3">
-                  <Col md={6}>
-                    <p>
-                      <strong>Address:</strong>
-                      <br />
-                      {address}, <br /> {city}, {taluka},<br />
-                      {district}, <br /> {state} - {pincode}
-                    </p>
-                  </Col>
-                </Row>
-                {/* IMAGES GRID */}
-                {images.length > 0 && (
-                  <>
-                    <h5 className="mb-3 fw-bold">Property Images</h5>
-                    <Row className="mb-4">
-                      {images.map((imgUrl, idx) => (
-                        <Col
-                          key={idx}
-                          xs={12}
-                          sm={6}
-                          md={6}
-                          lg={4}
-                          className="mb-3"
-                        >
-                          <Card className="h-100 shadow-sm">
-                            <Card.Img
-                              variant="top"
-                              src={imgUrl}
-                              alt={`Property Image ${idx + 1}`}
-                              style={{ height: "100%", objectFit: "cover" }}
-                            />
-                          </Card>
-                        </Col>
-                      ))}
-                    </Row>
-                  </>
-                )}
-
-                <hr />
 
                 {description && (
-                  <p className="mb-4">
-                    <strong>About:</strong> <br />
-                    {description}
-                  </p>
+                  <Row className="mb-3">
+                    <Col>
+                      <strong>About:</strong>
+                      <p>{description}</p>
+                    </Col>
+                  </Row>
                 )}
 
                 {user && (
@@ -190,18 +151,24 @@ const PropertyDetails = () => {
                     <strong>Posted By:</strong> {user.name}
                   </p>
                 )}
+
+                <p className="text-muted small">
+                  Posted on: {new Date(createdAt).toLocaleDateString()}
+                </p>
               </Col>
 
               <Col md={4}>
-                <Row className="mb-2">
+                <Row className="mb-3">
                   <Col md={12}>
                     <PropertyInquiryForm propertyName={socity} />
                   </Col>
                 </Row>
-                <Row className="mb-2">
+
+                <Row className="mb-3">
                   <Col md={12}>
                     <strong>Location:</strong>
                     <div
+                      className="border"
                       style={{
                         width: "100%",
                         height: "250px",
@@ -225,10 +192,34 @@ const PropertyDetails = () => {
               </Col>
             </Row>
 
-            <p className="text-muted small">
-              <strong>Posted on: </strong>{" "}
-              {new Date(createdAt).toLocaleDateString()}
-            </p>
+            {/* Additional Images Grid */}
+            {images.length > 0 && (
+              <>
+                <hr />
+                <h5 className="mb-3 fw-bold">Property Images</h5>
+                <Row className="g-3">
+                  {images.map((img, idx) => (
+                    <Col key={idx} xs={12} sm={6} md={6} lg={4}>
+                      <Card className="h-100 shadow-sm border-0">
+                        <div style={{ height: "100%", overflow: "hidden" }}>
+                          <Card.Img
+                            variant="top"
+                            src={img}
+                            alt={`Property Image ${idx + 1}`}
+                            className="img-fluid"
+                            style={{
+                              objectFit: "cover",
+                              height: "100%",
+                              width: "100%",
+                            }}
+                          />
+                        </div>
+                      </Card>
+                    </Col>
+                  ))}
+                </Row>
+              </>
+            )}
           </Card.Body>
         </Card>
       </Container>

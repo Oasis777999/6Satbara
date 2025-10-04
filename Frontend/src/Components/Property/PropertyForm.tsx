@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const PropertyForm = () => {
   const [formData, setFormData] = useState({
-    propertyType: "",
+    propertyType: "Residential",
     socity: "",
     minSize: "",
     maxSize: "",
@@ -61,8 +61,6 @@ const PropertyForm = () => {
       },
     };
 
-    console.log(propertyData);
-
     try {
       const res = await api.post("/property/add", propertyData);
       if (res.status === 201) {
@@ -82,7 +80,7 @@ const PropertyForm = () => {
     const promises = files.map((file) => {
       return new Promise((resolve, reject) => {
         if (file.size > maxSize) {
-          reject(`${file.name} exceeds 200kb`);
+          reject(`${file.name} exceeds 1000kb`);
           return;
         }
         const reader = new FileReader();

@@ -73,11 +73,8 @@ const FlatForm = () => {
       },
     };
 
-    console.log(flatData.breadth);
-
     try {
       const res = await api.post("/flat/add", flatData);
-      console.log(res);
 
       alert("Flat added successfully");
       navigate("/");
@@ -94,7 +91,7 @@ const FlatForm = () => {
     const promises = files.map((file) => {
       return new Promise((resolve, reject) => {
         if (file.size > maxSize) {
-          reject(`${file.name} exceeds 200kb`);
+          reject(`${file.name} exceeds 1000kb`);
           return;
         }
         const reader = new FileReader();
@@ -293,7 +290,7 @@ const FlatForm = () => {
               className="form-control"
             />
             <p className="text-danger font-sm">
-              Image size must be less than 200 KB
+              Image size must be less than 1000 KB
             </p>
             {images.length > 0 && (
               <div className="mt-3 d-flex flex-wrap gap-2">

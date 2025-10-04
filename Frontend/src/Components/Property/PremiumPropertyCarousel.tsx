@@ -4,16 +4,28 @@ import { useNavigate } from "react-router-dom";
 
 const PremiumPropertyCarousel = () => {
   const [properties, setProperties] = useState([]);
+
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    api
-      .get("/property/list")
-      .then((res) => setProperties(res.data.data))
-      .catch((err) => console.error(err));
+    const fetchProperties = async () => {
+      try {
+        const res = await api.get("/property/list");
+        setProperties(res.data.data);
+        setLoading(false);
+      } catch (err) {
+        console.error("Error fetching properties:", err);
+        setLoading(false);
+      }
+    };
+
+    fetchProperties();
   }, []);
 
-  const premiumProperties = properties.filter((property) => property.isPremium==true && property.verified==true);
+  const premiumProperties = properties.filter(
+    (property) => property.isPremium == true && property.verified == true
+  );
 
   // Group the flats into chunks of 3
   const chunkProperties = (arr, size) => {
@@ -26,68 +38,79 @@ const PremiumPropertyCarousel = () => {
 
   const groupedProperties = chunkProperties(premiumProperties, 3);
 
-  if (premiumProperties.length === 0) {
-    return <p className="text-center mt-4"></p>;
+  if (loading) {
+    return (
+      <div className="container mt-5 text-center">
+        <div className="spinner-border text-primary" role="status" />
+        <p>Loading...</p>
+      </div>
+    );
   }
 
   return (
-    <div className="container my-5 rounded shadow p-3">
-      <h2 className="text-center mb-4">Premium Properties</h2>
+    <div className="container my-5">
+      <div className="text-center mb-5">
+        <h2 className="text-3xl font-bold text-gray-800 tracking-wide">
+          🏙️ Premium Properties
+        </h2>
+        <p className="text-gray-500 text-sm mt-2">
+          Discover luxurious spaces designed for your lifestyle
+        </p>
+      </div>
 
       <div
         id="premiumPropertyCarousel"
-        className="carousel slide"
+        className="carousel slide rounded-4 overflow-hidden shadow-2xl bg-gradient-to-br from-gray-50 via-white to-gray-100"
         data-bs-ride="carousel"
-        data-bs-interval="3000" // auto-slide every 4 seconds
+        data-bs-interval="5000"
       >
-        <div className="carousel-inner">
+        <div className="carousel-inner py-4">
           {groupedProperties.map((group, groupIndex) => (
             <div
               className={`carousel-item ${groupIndex === 0 ? "active" : ""}`}
               key={groupIndex}
             >
-              <div className="row">
+              <div className="row justify-content-center g-4">
                 {group.map((property, index) => (
                   <div className="col-md-4" key={index}>
-                    <div className="card shadow-sm mb-4">
+                    <div className="card border-0 rounded-4 shadow-lg transition-all hover:-translate-y-2 hover:shadow-2xl bg-white/80 backdrop-blur-md">
                       {property.images && property.images.length > 0 && (
-                        <img
-                          src={property.images[0]}
-                          className="card-img-top"
-                          alt={`Flat ${property.flatNumber}`}
-                          style={{ height: "200px", objectFit: "cover" }}
-                        />
+                        <div className="relative">
+                          <img
+                            src={property.images[0]}
+                            alt={`Property ${property.socity}`}
+                            className="card-img-top rounded-top-4 object-cover"
+                            style={{ height: "230px", objectFit: "cover" }}
+                          />
+                          <span className="absolute top-3 right-3 bg-black/70 text-white text-xs px-3 py-1 rounded-full">
+                            ₹{property.price?.toLocaleString()} /sq.ft
+                          </span>
+                        </div>
                       )}
+
                       <div className="card-body">
-                        <h5 className="card-title">
-                          {property.apartmentName} - {property.socity}
+                        <h5 className="card-title font-semibold text-lg text-gray-800">
+                          {property.socity}
                         </h5>
-                        <p className="card-text">
-                          <strong>Flat:</strong> {property.flatNumber}, Floor{" "}
-                          {property.floor}/{property.totalFloors}
+                        <p className="text-sm text-gray-600 leading-relaxed">
+                          <strong>Size:</strong> {property.minSize}–
+                          {property.maxSize} Sq.Ft
                           <br />
-                          <strong>Bedrooms:</strong> {property.bedrooms} |{" "}
-                          <strong>Bathrooms:</strong> {property.bathrooms}
+                          <strong>Facing:</strong> {property.facing}
                           <br />
-                          <strong>Furnishing:</strong> {property.furnishing}
+                          <strong>Location:</strong> {property.city},{" "}
+                          {property.state}
                           <br />
-                          <strong>Carpet Area:</strong> {property.carpetArea} sq.ft
-                          <br />
-                          <strong>Price:</strong> ₹
-                          {property.price?.toLocaleString()}{" "}
-                          {property.isNegociable && "(Negotiable)"}
-                          <br />
-                          <strong>Location:</strong> {property.address}, {property.city}
-                          , {property.state} - {property.pincode}
+                          <strong>Posted By:</strong> {property.user?.name}
                         </p>
-                        <p className="text-muted">
-                          {property.about?.slice(0, 80)}...
+                        <p className="text-gray-500 text-sm mt-2">
+                          {property.description?.slice(0, 70)}...
                         </p>
                         <button
-                          className="btn btn-success mt-2"
-                          onClick={() => navigate(`/flat/${property._id}`)}
+                          className="btn btn-primary w-100 mt-3 fw-semibold rounded-pill py-2 shadow-sm hover:bg-gray-900 transition-all"
+                          onClick={() => navigate(`/property/${property._id}`)}
                         >
-                          See More...
+                          View Details
                         </button>
                       </div>
                     </div>
@@ -106,7 +129,12 @@ const PremiumPropertyCarousel = () => {
           data-bs-slide="prev"
         >
           <span
-            className="carousel-control-prev-icon bg-dark"
+            className="carousel-control-prev-icon"
+            style={{
+              backgroundColor: "rgba(0,0,0,0.5)",
+              borderRadius: "50%",
+              padding: "12px",
+            }}
             aria-hidden="true"
           ></span>
         </button>
@@ -117,7 +145,12 @@ const PremiumPropertyCarousel = () => {
           data-bs-slide="next"
         >
           <span
-            className="carousel-control-next-icon bg-dark"
+            className="carousel-control-next-icon"
+            style={{
+              backgroundColor: "rgba(0,0,0,0.5)",
+              borderRadius: "50%",
+              padding: "12px",
+            }}
             aria-hidden="true"
           ></span>
         </button>

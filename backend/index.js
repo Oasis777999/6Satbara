@@ -8,7 +8,15 @@ require("dotenv").config();
 require("./Config/connect");
 
 app.use(express.json({ limit: "20mb" }));
-app.use(cors());
+
+// Cors implementation by the domain name
+app.use(
+  cors({
+    origin: ["https://satbaraa.com", "https://admin.satbaraa.com"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    credentials: true,
+  })
+);
 
 const contactUserRoutes = require("./Routes/contactUser");
 const userRoutes = require("./Routes/User");
@@ -25,7 +33,5 @@ app.use("/inquiry", inquiryRoutes);
 app.get("/", (req, res) => {
   res.send("Application is Working");
 });
-
-
 
 app.listen(port, () => console.log(`http://localhost:${port}`));

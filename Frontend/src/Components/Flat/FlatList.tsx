@@ -10,6 +10,7 @@ const FlatList = () => {
   const [flats, setFlats] = useState([]);
   const [taluka, setTaluka] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(true);
   const flatsPerPage = 5;
 
   const navigate = useNavigate();
@@ -25,9 +26,7 @@ const FlatList = () => {
       let fetchedFlats = result.data.data;
 
       // List only the verified flats
-      fetchedFlats = fetchedFlats.filter((flat) =>
-        flat.verified == true
-      );
+      fetchedFlats = fetchedFlats.filter((flat) => flat.verified == true);
 
       setAllFlats(fetchedFlats);
 
@@ -36,8 +35,10 @@ const FlatList = () => {
       }
 
       setFlats(fetchedFlats);
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching flats:", error);
+      setLoading(false);
     }
   };
 
@@ -62,6 +63,18 @@ const FlatList = () => {
       setCurrentPage((prev) => prev - 1);
     }
   };
+
+  if (loading) {
+    return (
+      <div
+        className="container mt-5 py-5 text-center d-flex flex-column justify-content-center align-items-center"
+        style={{ minHeight: "100vh" }}
+      >
+        <div className="spinner-border text-primary" role="status" />
+        <p>Loading...</p>
+      </div>
+    );
+  }
 
   return (
     <section className="py-5 my-5 bg-light">

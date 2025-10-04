@@ -4,16 +4,27 @@ import { useNavigate } from "react-router-dom";
 
 const PremiumFlatsCarousel = () => {
   const [flats, setFlats] = useState([]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    api
-      .get("/flat/list")
-      .then((res) => setFlats(res.data.data))
-      .catch((err) => console.error(err));
+    const fetchFlats = async () => {
+      try {
+        const res = await api.get("/flat/list");
+        setFlats(res.data.data);
+        setLoading(false);
+      } catch (err) {
+        console.error("Error fetching flats:", err);
+        setLoading(false);
+      }
+    };
+
+    fetchFlats();
   }, []);
 
-  const premiumFlats = flats.filter((flat) => flat.isPremium===true && flat.verified===true);
+  const premiumFlats = flats.filter(
+    (flat) => flat.isPremium === true && flat.verified === true
+  );
 
   // Group the flats into chunks of 3
   const chunkFlats = (arr, size) => {
@@ -26,19 +37,35 @@ const PremiumFlatsCarousel = () => {
 
   const groupedFlats = chunkFlats(premiumFlats, 3);
 
+  if (loading) {
+    return (
+      <div className="container mt-5 text-center">
+        <div className="spinner-border text-primary" role="status" />
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
   if (premiumFlats.length === 0) {
-    return <p className="text-center mt-4">No premium flats available.</p>;
+    return <p className="text-center mt-4"></p>;
   }
 
   return (
-    <div className="container my-5 rounded shadow p-3">
-      <h2 className="text-center mb-4">Premium Flats</h2>
+    <div className="container my-5">
+      <div className="text-center mb-5">
+        <h2 className="text-3xl font-bold text-gray-800 tracking-wide">
+          🌟 Premium Flats
+        </h2>
+        <p className="text-gray-500 text-sm mt-2">
+          Explore luxurious spaces crafted for modern living
+        </p>
+      </div>
 
       <div
         id="premiumFlatsCarousel"
-        className="carousel slide"
+        className="carousel slide rounded-4 overflow-hidden shadow-xl bg-gradient-to-br from-gray-100 via-white to-gray-200"
         data-bs-ride="carousel"
-        data-bs-interval="3000" // auto-slide every 4 seconds
+        data-bs-interval="5000"
       >
         <div className="carousel-inner">
           {groupedFlats.map((group, groupIndex) => (
@@ -46,23 +73,28 @@ const PremiumFlatsCarousel = () => {
               className={`carousel-item ${groupIndex === 0 ? "active" : ""}`}
               key={groupIndex}
             >
-              <div className="row">
+              <div className="row g-4 justify-content-center py-4">
                 {group.map((flat, index) => (
                   <div className="col-md-4" key={index}>
-                    <div className="card shadow-sm mb-4">
+                    <div className="card border-0 rounded-4 shadow-lg transition-transform hover:-translate-y-2 hover:shadow-2xl bg-white/70 backdrop-blur-md">
                       {flat.images && flat.images.length > 0 && (
-                        <img
-                          src={flat.images[0]}
-                          className="card-img-top"
-                          alt={`Flat ${flat.flatNumber}`}
-                          style={{ height: "200px", objectFit: "cover" }}
-                        />
+                        <div className="relative">
+                          <img
+                            src={flat.images[0]}
+                            alt={`Flat ${flat.flatNumber}`}
+                            className="card-img-top rounded-top-4 object-cover"
+                            style={{ height: "230px", objectFit: "cover" }}
+                          />
+                          <span className="absolute top-3 right-3 bg-black/70 text-white text-xs px-3 py-1 rounded-full">
+                            ₹{flat.price?.toLocaleString()}
+                          </span>
+                        </div>
                       )}
                       <div className="card-body">
-                        <h5 className="card-title">
+                        <h5 className="card-title font-semibold text-lg text-gray-800">
                           {flat.apartmentName} - {flat.socity}
                         </h5>
-                        <p className="card-text">
+                        <p className="text-sm text-gray-600 leading-relaxed">
                           <strong>Flat:</strong> {flat.flatNumber}, Floor{" "}
                           {flat.floor}/{flat.totalFloors}
                           <br />
@@ -73,21 +105,16 @@ const PremiumFlatsCarousel = () => {
                           <br />
                           <strong>Carpet Area:</strong> {flat.carpetArea} sq.ft
                           <br />
-                          <strong>Price:</strong> ₹
-                          {flat.price?.toLocaleString()}{" "}
-                          {flat.isNegociable && "(Negotiable)"}
-                          <br />
-                          <strong>Location:</strong> {flat.address}, {flat.city}
-                          , {flat.state} - {flat.pincode}
+                          <strong>Location:</strong> {flat.city}, {flat.state}
                         </p>
-                        <p className="text-muted">
-                          {flat.about?.slice(0, 80)}...
+                        <p className="text-gray-500 text-sm mt-2">
+                          {flat.about?.slice(0, 70)}...
                         </p>
                         <button
-                          className="btn btn-success mt-2"
+                          className="btn btn-primary w-100 mt-3 fw-semibold rounded-pill py-2 shadow-sm hover:bg-gray-900 transition-all"
                           onClick={() => navigate(`/flat/${flat._id}`)}
                         >
-                          See More...
+                          View Details
                         </button>
                       </div>
                     </div>
@@ -106,7 +133,12 @@ const PremiumFlatsCarousel = () => {
           data-bs-slide="prev"
         >
           <span
-            className="carousel-control-prev-icon bg-dark"
+            className="carousel-control-prev-icon"
+            style={{
+              backgroundColor: "rgba(0,0,0,0.5)",
+              borderRadius: "50%",
+              padding: "10px",
+            }}
             aria-hidden="true"
           ></span>
         </button>
@@ -117,7 +149,12 @@ const PremiumFlatsCarousel = () => {
           data-bs-slide="next"
         >
           <span
-            className="carousel-control-next-icon bg-dark"
+            className="carousel-control-next-icon"
+            style={{
+              backgroundColor: "rgba(0,0,0,0.5)",
+              borderRadius: "50%",
+              padding: "10px",
+            }}
             aria-hidden="true"
           ></span>
         </button>

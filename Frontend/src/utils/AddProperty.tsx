@@ -16,7 +16,7 @@ const AddProperty = () => {
   };
   return (
     <>
-      {/* Add Property Dropdown */}-
+      {/* Add Property Dropdown */}
       <div className="nav-item dropdown d-md-none" ref={dropdownRef}>
         <span
           className="nav-link blinking-button text-dark"

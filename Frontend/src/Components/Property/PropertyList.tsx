@@ -11,6 +11,8 @@ const PropertyList = () => {
   const [taluka, setTaluka] = useState("");
   const [properties, setProperties] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+
+  const [loading, setLoading] = useState(true);
   const propertiesPerPage = 5;
 
   const navigate = useNavigate();
@@ -43,8 +45,10 @@ const PropertyList = () => {
       }
 
       setProperties(filtered);
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching properties:", error);
+      setLoading(false);
     }
   };
 
@@ -60,6 +64,18 @@ const PropertyList = () => {
     indexOfFirstProperty,
     indexOfLastProperty
   );
+
+  if (loading) {
+    return (
+      <div
+        className="container mt-5 py-5 text-center d-flex flex-column justify-content-center align-items-center"
+        style={{ minHeight: "100vh" }}
+      >
+        <div className="spinner-border text-primary" role="status" />
+        <p>Loading...</p>
+      </div>
+    );
+  }
 
   const handleNextPage = () => {
     if (indexOfLastProperty < properties.length) {

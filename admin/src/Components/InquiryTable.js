@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import api from '../api/api';
 
 const InquiryTable = () => {
   const [inquiries, setInquiries] = useState([]);
@@ -8,7 +8,7 @@ const InquiryTable = () => {
 
   useEffect(() => {
     // Replace with your real API endpoint
-    axios.get('http://localhost:5000/contact/list')
+    api.get('/contact/list')
       .then(res => {
         setInquiries(res.data);
         setLoading(false);

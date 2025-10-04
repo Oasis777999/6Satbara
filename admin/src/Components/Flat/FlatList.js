@@ -6,6 +6,7 @@ const FlatList = () => {
   const [flats, setFlats] = useState([]);
   const [filterdData, setFilterdData] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
 
@@ -14,8 +15,10 @@ const FlatList = () => {
       const result = await api.get("/flat/list"); // Adjust this to your actual endpoint
       setFlats(result.data.data);
       setFilterdData(result.data.data);
+      setLoading(false);
     } catch (error) {
       console.error("Failed to fetch flat list:", error);
+      setLoading(false);
     }
   };
 
@@ -57,7 +60,7 @@ const FlatList = () => {
         getFlats();
       }
     } catch (error) {
-      console.error("Failed to update status:",  error);
+      console.error("Failed to update status:", error);
       alert("Error updating status");
     }
   };

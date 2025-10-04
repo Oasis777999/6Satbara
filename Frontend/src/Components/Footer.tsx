@@ -12,16 +12,16 @@ const Footer = () => {
             {/* Brand Info */}
             <Col md={3}>
               <h5 className="text-uppercase fw-bold">Prime Land Dealers</h5>
-              <p className="text-white-50 small">
+              <p className="text-white-50 small mb-0">
                 Trusted land partner since 2015. We offer legal, verified land
                 plots with complete documentation and full support for your
                 investment.
               </p>
             </Col>
 
-            {/* Quick Links */}
+            {/* Main Links */}
             <Col md={3}>
-              <h6 className="text-uppercase fw-semibold mb-3">Quick Links</h6>
+              <h6 className="text-uppercase fw-semibold mb-3">Main Links</h6>
               <ul className="list-unstyled">
                 <li>
                   <Link
@@ -58,13 +58,15 @@ const Footer = () => {
               </ul>
             </Col>
 
-            {/* Quick Links */}
+            {/* Property Categories */}
             <Col md={3}>
-              <h6 className="text-uppercase fw-semibold mb-3">Quick Links</h6>
+              <h6 className="text-uppercase fw-semibold mb-3">
+                Property Types
+              </h6>
               <ul className="list-unstyled">
                 <li>
                   <Link
-                    to="/residential"
+                    to="/Residential"
                     className="text-white text-decoration-none d-block mb-1"
                   >
                     Residential Plots
@@ -72,7 +74,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    to="/commercial"
+                    to="/Commercial"
                     className="text-white text-decoration-none d-block mb-1"
                   >
                     Commercial Plots
@@ -80,7 +82,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    to="/agriculture"
+                    to="/Agriculture"
                     className="text-white text-decoration-none d-block mb-1"
                   >
                     Agriculture Plots
@@ -102,7 +104,7 @@ const Footer = () => {
               <h6 className="text-uppercase fw-semibold mb-3">
                 Connect With Us
               </h6>
-              <div className="d-flex  justify-content-start gap-3 mb-3">
+              <div className="d-flex justify-content-start gap-3 mb-3">
                 <a
                   href="https://linkedin.com/in/yourusername"
                   target="_blank"
@@ -112,7 +114,7 @@ const Footer = () => {
                   <FaLinkedin size={20} />
                 </a>
                 <a
-                  href="https://www.facebook.com/share/16DyFpJ8Av/" // replace with your Facebook page/profile URL
+                  href="https://www.facebook.com/share/16DyFpJ8Av/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white"
@@ -120,7 +122,7 @@ const Footer = () => {
                   <FaFacebookF size={20} />
                 </a>
                 <a
-                  href="https://wa.me/919876543210" // replace with your number
+                  href="https://wa.me/919876543210"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white"
@@ -136,20 +138,23 @@ const Footer = () => {
           {/* Bottom Bar */}
           <Row>
             <Col className="text-center">
-              <small className="text-muted text-primary">
+              <small className="text-white-50">
                 &copy; {new Date().getFullYear()}{" "}
-                <strong>ADVAIT TELESERVICES PVT. LTD.</strong> All rights
-                reserved.
+                <strong className="text-primary">
+                  ADVAIT TELESERVICES PVT. LTD.
+                </strong>{" "}
+                All rights reserved.
               </small>
             </Col>
           </Row>
         </Container>
       </footer>
 
-      {/* Contact Us */}
+      {/* Floating Contact Buttons */}
       <div className="floating-btn-group">
-        {/* Add Property*/}
+        {/* Add Property */}
         <AddProperty />
+
         {/* WhatsApp Contact */}
         <a
           href="https://wa.me/919175982712"
@@ -160,7 +165,7 @@ const Footer = () => {
           <i className="bi bi-whatsapp"></i>
         </a>
 
-        {/* Call */}
+        {/* Call Button */}
         <a href="tel:+919175982712" className="floating-btn btn-call">
           <i className="bi bi-telephone-fill"></i>
         </a>
