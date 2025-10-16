@@ -12,6 +12,7 @@ const PremiumPropertyCarousel = () => {
     const fetchProperties = async () => {
       try {
         const res = await api.get("/property/list");
+        console.log(res);
         setProperties(res.data.data);
         setLoading(false);
       } catch (err) {

@@ -25,6 +25,9 @@ const FlatList = () => {
       const result = await api.get("/flat/list");
       let fetchedFlats = result.data.data;
 
+      console.log(result);
+      
+
       // List only the verified flats
       fetchedFlats = fetchedFlats.filter((flat) => flat.verified == true);
 

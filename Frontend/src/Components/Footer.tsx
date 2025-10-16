@@ -1,6 +1,11 @@
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { FaLinkedin, FaWhatsapp, FaFacebookF } from "react-icons/fa";
+import {
+  FaYoutube,
+  FaWhatsapp,
+  FaFacebookF,
+  FaInstagram,
+} from "react-icons/fa";
 import AddProperty from "../utils/AddProperty";
 
 const Footer = () => {
@@ -106,12 +111,12 @@ const Footer = () => {
               </h6>
               <div className="d-flex justify-content-start gap-3 mb-3">
                 <a
-                  href="https://linkedin.com/in/yourusername"
+                  href="https://www.youtube.com/@msproperty7"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white"
                 >
-                  <FaLinkedin size={20} />
+                  <FaYoutube size={20} />
                 </a>
                 <a
                   href="https://www.facebook.com/share/16DyFpJ8Av/"
@@ -122,7 +127,15 @@ const Footer = () => {
                   <FaFacebookF size={20} />
                 </a>
                 <a
-                  href="https://wa.me/919876543210"
+                  href="https://www.instagram.com/msproperty136/#"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-white"
+                >
+                  <FaInstagram size={20} />
+                </a>
+                <a
+                  href="https://wa.me/919175982712"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-white"

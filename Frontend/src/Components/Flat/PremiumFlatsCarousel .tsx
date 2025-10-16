@@ -10,7 +10,7 @@ const PremiumFlatsCarousel = () => {
   useEffect(() => {
     const fetchFlats = async () => {
       try {
-        const res = await api.get("/flat/list");
+        const res = await api.get("/flat/list");        
         setFlats(res.data.data);
         setLoading(false);
       } catch (err) {
